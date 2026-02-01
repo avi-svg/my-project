@@ -1,0 +1,81 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 16px 32px;
+    color: white;
+}
+
+/* Left section (My Cart) */
+.left {
+    font-size: 1.2rem;
+}
+
+/* Right section (Product, Reviews) */
+.right {
+    display: flex;
+    gap: 24px;
+    font-size: 1.2rem;
+}
+
+/* Styling the links */
+.link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: #ccc;
+}
+
+/* Main content area */
+.mainContent {
+    padding: 20px;
+    min-height: calc(100vh - 64px);
+    /* Adjust height to account for the navbar */
+}
+
+.cartContainer {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -6px;
+  right: -12px;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+
+  background-color: red;
+  color: white;
+
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: pop 0.25s ease-out;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
