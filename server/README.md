@@ -1,6 +1,6 @@
-# Client
+# Server
 
-React frontend application.
+Node.js Express API.
 
 ## Run locally
 npm install
