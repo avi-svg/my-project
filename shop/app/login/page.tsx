@@ -1,42 +1,28 @@
-"use client";
+'use client'
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { login } from "./services/api";
 
-export default function LoginPage() {
-  const router = useRouter();
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const searchParams = useSearchParams();
-
-  const redirectTo = searchParams.get("redirect") || "/products";
-
-  const handleLogin = async () => {
-    const response = await fetch("http://localhost:3001/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) {
-      alert("התחברות נכשלה");
-      return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+      // הצלחה → redirect / update state
+      window.location.href = "/cart";
+    } catch {
+      setError("אימייל או סיסמה שגויים");
     }
-
-    const data = await response.json();
-
-    localStorage.setItem("token", data.token);
-
-    router.push(redirectTo);
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-
+    <form onSubmit={handleSubmit}>
       <input
+        type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -49,7 +35,9 @@ export default function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button onClick={handleLogin}>Login</button>
-    </div>
+      <button type="submit">Login</button>
+
+      {error && <p>{error}</p>}
+    </form>
   );
 }

@@ -5,9 +5,11 @@ const app = express()
 const routes = require('./routes/index')
 const myMongo = require('./config/mongodb')
 const cors = require('cors')
+const cookieParser = require("cookie-parser");
 
 app.use(express.json())
 app.use(cors());
+app.use(cookieParser());
 
 app.use('/api', routes)
 
