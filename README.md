@@ -1,7 +1,7 @@
 # Fullstack Demo Project
 
 ## Live Demo
-https://my-project.vercel.app
+
 
 ## Overview
 A fullstack demo project built to simulate a real business website.
