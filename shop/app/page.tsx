@@ -1,10 +1,14 @@
-'use client'
+"use client";
 
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { refresh } from "./login/services/api";
-import { setAuthenticated, setUnauthenticated } from "./features/auth/authSlice";
+import {
+  setAuthenticated,
+  setUnauthenticated,
+} from "./features/auth/authSlice";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -22,5 +26,8 @@ export default function Home() {
     checkAuth();
   }, []);
 
-  redirect("/products");
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/products");
+  }, []);
 }
