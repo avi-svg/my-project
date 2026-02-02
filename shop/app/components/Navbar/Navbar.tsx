@@ -1,6 +1,6 @@
 "use client";
 
-import { useAtom } from "jotai";
+
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
