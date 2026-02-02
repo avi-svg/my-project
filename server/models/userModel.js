@@ -13,14 +13,14 @@ const getUserByEmail = async (email) => {
 };
 
 
-const createUser = async (email, hashedPassword) => {
+const createUser = async (email, password) => {
   const query = `
     INSERT INTO users (email, password)
     VALUES ($1, $2)
     RETURNING id, email
   `;
 
-  const { rows } = await postgres.query(query, [email, hashedPassword]);
+  const { rows } = await postgres.query(query, [email, password]);
   return rows[0];
 };
 
@@ -32,7 +32,7 @@ const getUserById = async (id) => {
     WHERE id = $1
   `;
 
-  const { rows } = await pool.query(query, [id]);
+  const { rows } = await postgres.query(query, [id]);
   return rows[0];
 };
 

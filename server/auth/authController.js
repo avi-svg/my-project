@@ -3,6 +3,30 @@ const Session = require("../models/SessionModel");
 const bcrypt = require("bcrypt");
 const User = require('../models/userModel');
 
+const crypto = require("crypto");
+
+const createAccessToken = (userId) => {
+  return jwt.sign(
+    { userId },
+    process.env.JWT_SECRET,
+    { expiresIn: "10m" }
+  );
+};
+
+const createRefreshToken = () => {
+  return crypto.randomBytes(64).toString("hex");
+};
+
+const hashToken = (token) => {
+  return crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+};
+
+
+
+
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
