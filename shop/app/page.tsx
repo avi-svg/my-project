@@ -1,33 +1,32 @@
 "use client";
 
-
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 import { refresh } from "./login/services/api";
 import {
   setAuthenticated,
   setUnauthenticated,
 } from "./features/auth/authSlice";
-import { useRouter } from "next/navigation";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkAuthAndRedirect = async () => {
       try {
         await refresh();
         dispatch(setAuthenticated());
       } catch {
         dispatch(setUnauthenticated());
+      } finally {
+        router.push("/products");
       }
     };
 
-    checkAuth();
-  }, []);
+    checkAuthAndRedirect();
+  }, [dispatch, router]);
 
-  const router = useRouter();
-  useEffect(() => {
-    router.push("/products");
-  }, []);
+  return null; 
 }
