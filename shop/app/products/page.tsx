@@ -12,6 +12,8 @@ export default function Products() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+
     const fetchProduct = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
