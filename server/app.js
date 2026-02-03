@@ -1,4 +1,5 @@
 require('dotenv').config()
+console.log("DB ENV:", process.env.DB_URL);
 
 const express = require('express')
 const app = express()
@@ -9,7 +10,7 @@ const cookieParser = require("cookie-parser");
 
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: true,
     credentials: true,
 }
 ));
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
         error: 'Rout Not Found',
     })
 })
+console.log("DB:", process.env.DATABASE_URL?.split("@")[1]);
 
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening on port ${process.env.PORT}`)
